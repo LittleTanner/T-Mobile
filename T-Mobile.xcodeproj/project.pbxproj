@@ -56,15 +56,39 @@
 		FC1F270D242E62A500C08CAA /* T-Mobile */ = {
 			isa = PBXGroup;
 			children = (
+				FC1F2722242E643A00C08CAA /* Resources */,
+				FC1F2723242E644200C08CAA /* Controllers */,
+				FC1F2724242E644900C08CAA /* Views */,
+			);
+			path = "T-Mobile";
+			sourceTree = "<group>";
+		};
+		FC1F2722242E643A00C08CAA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
 				FC1F270E242E62A500C08CAA /* AppDelegate.swift */,
 				FC1F2710242E62A500C08CAA /* SceneDelegate.swift */,
-				FC1F2712242E62A500C08CAA /* ViewController.swift */,
-				FC1F2714242E62A500C08CAA /* Main.storyboard */,
 				FC1F2717242E62A800C08CAA /* Assets.xcassets */,
 				FC1F2719242E62A800C08CAA /* LaunchScreen.storyboard */,
 				FC1F271C242E62A800C08CAA /* Info.plist */,
 			);
-			path = "T-Mobile";
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		FC1F2723242E644200C08CAA /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				FC1F2712242E62A500C08CAA /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		FC1F2724242E644900C08CAA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FC1F2714242E62A500C08CAA /* Main.storyboard */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -294,7 +318,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kevintanner.T-Mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -312,7 +336,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kevintanner.T-Mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
