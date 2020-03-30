@@ -103,6 +103,22 @@ extension UserInfoViewController: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if isFiltering == true {
+            let selectedRepo = filteredUserRepos[indexPath.row]
+            if let url = URL(string: selectedRepo.url) {
+                UIApplication.shared.open(url)
+            }
+            
+        } else {
+            let selectedRepo = NetworkManager.shared.userRepos[indexPath.row]
+            if let url = URL(string: selectedRepo.url) {
+                UIApplication.shared.open(url)
+            }
+        }
+    }
 }
 
 

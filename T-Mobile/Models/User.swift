@@ -52,9 +52,11 @@ struct UserRepo: Codable {
         case name
         case forksCount = "forks_count"
         case starCount = "stargazers_count"
+        case url = "html_url"
     }
     
     let name: String
     let forksCount: Int
     let starCount: Int
+    let url: String
 }

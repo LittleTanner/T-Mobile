@@ -12,30 +12,14 @@ class GetUsersTableViewController: UITableViewController {
     
     @IBOutlet weak var getUsersSearchBar: UISearchBar!
     
-    //    var user: User?
-    
-    //    var searchUsers: [SearchUser]? {
-    //        didSet {
-    //            DispatchQueue.main.async {
-    //                self.tableView.reloadData()
-    //            }
-    //        }
-    //    }
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         getUsersSearchBar.delegate = self
-        //        NetworkManager.shared.getUserInfo(for: "littletanner") { (user) in
-        //            self.user = user
-        //        }
     }
     
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        
         return NetworkManager.shared.searchUsers.count
     }
     
@@ -50,7 +34,6 @@ class GetUsersTableViewController: UITableViewController {
                 if let user = user {
                     DispatchQueue.main.async {
                         cell.numberOfReposLabel.text = "Repos: \(user.numberOfRepos)"
-                        //                        self.tableView.reloadData()
                     }
                 }
             }
@@ -79,19 +62,17 @@ class GetUsersTableViewController: UITableViewController {
                 }
             }
         }
-        
-        
     }
 }
 
 extension GetUsersTableViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        NetworkManager.shared.getUsers(for: searchText) { (searchUsers) in
-//            DispatchQueue.main.async {
-//                searchBar.resignFirstResponder()
-//                self.tableView.reloadData()
-//            }
-//        }
+        NetworkManager.shared.getUsers(for: searchText) { (searchUsers) in
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+                self.tableView.reloadData()
+            }
+        }
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

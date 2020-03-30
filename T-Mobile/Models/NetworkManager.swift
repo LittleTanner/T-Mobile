@@ -56,9 +56,6 @@ class NetworkManager {
         }
         dataTask.resume()
     }
-
-    
-    
     
     func getUserInfo(for username: String, complete: @escaping (User?) -> Void) {
         guard let baseURL = URL(string: "https://api.github.com/users/") else { complete(nil); return }
