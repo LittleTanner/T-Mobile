@@ -12,15 +12,15 @@ class GetUsersTableViewController: UITableViewController {
     
     @IBOutlet weak var getUsersSearchBar: UISearchBar!
     
-//    var user: User?
+    //    var user: User?
     
-//    var searchUsers: [SearchUser]? {
-//        didSet {
-//            DispatchQueue.main.async {
-//                self.tableView.reloadData()
-//            }
-//        }
-//    }
+    //    var searchUsers: [SearchUser]? {
+    //        didSet {
+    //            DispatchQueue.main.async {
+    //                self.tableView.reloadData()
+    //            }
+    //        }
+    //    }
     
     
     override func viewDidLoad() {
@@ -50,7 +50,7 @@ class GetUsersTableViewController: UITableViewController {
                 if let user = user {
                     DispatchQueue.main.async {
                         cell.numberOfReposLabel.text = "Repos: \(user.numberOfRepos)"
-//                        self.tableView.reloadData()
+                        //                        self.tableView.reloadData()
                     }
                 }
             }
@@ -68,14 +68,6 @@ class GetUsersTableViewController: UITableViewController {
         return cell
     }
     
-    
-    // MARK: - Navigation
-    
-    override func performSegue(withIdentifier identifier: String, sender: Any?) {
-        performSegue(withIdentifier: "ToUserDetail", sender: self)
-    }
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "ToUserDetail" {
@@ -94,30 +86,22 @@ class GetUsersTableViewController: UITableViewController {
 
 extension GetUsersTableViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        //        NetworkManager.shared.getUserInfo(for: searchText) { (user) in
-        //            self.user = user
-        //        }
+//        NetworkManager.shared.getUsers(for: searchText) { (searchUsers) in
+//            DispatchQueue.main.async {
+//                searchBar.resignFirstResponder()
+//                self.tableView.reloadData()
+//            }
+//        }
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let searchText = searchBar.text {
-            //            NetworkManager.shared.getUserInfo(for: searchText) { (user) in
-            //                self.user = user
-            //                DispatchQueue.main.async {
-            //                    searchBar.resignFirstResponder()
-            //                }
-            //            }
             NetworkManager.shared.getUsers(for: searchText) { (searchUsers) in
-                
-//                self.searchUsers = searchUsers
-                
                 DispatchQueue.main.async {
                     searchBar.resignFirstResponder()
                     self.tableView.reloadData()
                 }
-                
             }
-            
         }
     }
 }
