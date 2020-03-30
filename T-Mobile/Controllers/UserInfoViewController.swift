@@ -79,7 +79,11 @@ class UserInfoViewController: UIViewController {
 
 extension UserInfoViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return NetworkManager.shared.userRepos.count
+        if isFiltering == true {
+            return filteredUserRepos.count
+        } else {
+            return NetworkManager.shared.userRepos.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -104,54 +108,44 @@ extension UserInfoViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension UserInfoViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText == "" {
+            isFiltering = false
+            self.repoTableView.reloadData()
+        }
+        
         if let userRepos = userRepos {
             isFiltering = true
-            
+            filteredUserRepos = []
             for repo in userRepos {
-                if repo.name.contains(searchText) {
+                if repo.name.lowercased().contains(searchText.lowercased()) {
                     filteredUserRepos.append(repo)
                 }
             }
-            
-            DispatchQueue.main.async {
-                self.repoSearchBar.resignFirstResponder()
-                self.repoTableView.reloadData()
-            }
-        }
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        isFiltering = false
-        DispatchQueue.main.async {
-            self.repoSearchBar.resignFirstResponder()
+
+
             self.repoTableView.reloadData()
         }
     }
     
-
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let userRepos = userRepos {
             isFiltering = true
-            
-            guard let searchText = searchBar.text, searchText != "" else { return }
+            filteredUserRepos = []
+            guard let searchText = searchBar.text, searchText != "" else {
+                isFiltering = false
+                self.repoTableView.reloadData()
+                searchBar.resignFirstResponder()
+                return
+            }
             
             for repo in userRepos {
-                if repo.name.contains(searchText) {
+                if repo.name.lowercased().contains(searchText.lowercased()) {
                     filteredUserRepos.append(repo)
                 }
             }
-            
-            DispatchQueue.main.async {
-                self.repoSearchBar.resignFirstResponder()
-                self.repoTableView.reloadData()
-            }
-        }
-    }
-    
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        DispatchQueue.main.async {
-            self.repoSearchBar.resignFirstResponder()
+
             self.repoTableView.reloadData()
         }
+        searchBar.resignFirstResponder()
     }
 }
